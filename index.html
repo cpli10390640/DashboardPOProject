@@ -316,6 +316,7 @@
 
       if (
         value.includes("pending") ||
+        value.includes("freeze") ||
         value.includes("wait") ||
         value.includes("hold") ||
         value === ""
@@ -418,6 +419,7 @@
         return (
           !status ||
           status.includes("pending") ||
+          status.includes("freeze") ||
           status.includes("wait") ||
           status.includes("hold")
         );
@@ -456,6 +458,7 @@
           passFilter =
             !status ||
             status.includes("pending") ||
+            status.includes("freeze") ||
             status.includes("wait") ||
             status.includes("hold");
         }
