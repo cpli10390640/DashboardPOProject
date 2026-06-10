@@ -115,7 +115,7 @@
     onclick="switchPage('detailDev')"
     class="nav-inactive px-5 py-3 rounded-xl font-medium shadow"
   >
-    💻 Detail Dev
+    💻 OPS3 Detail Dev
   </button>
 </div>
 
@@ -217,7 +217,7 @@
     <div class="p-6">
       <div class="flex justify-between items-center mb-4 gap-3 flex-wrap">
         <h2 class="text-xl font-semibold text-gray-800">
-          Detail Dev
+          OPS3 Detail Dev
         </h2>
 
         <span class="px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-700">
@@ -229,7 +229,7 @@
         id="devSearchInput"
         oninput="renderDevCards()"
         type="text"
-        placeholder="Search detail dev..."
+        placeholder="Search OPS3 Detail Dev..."
         class="w-full mb-5 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
       />
 
@@ -588,7 +588,15 @@
         const response = await fetch(detailDevCsvUrl);
         const text = await response.text();
         const rows = parseCSV(text);
-        const result = rowsToObjects(rows);
+
+        /*
+          OPS3 Detail Dev:
+          Row 1-6 = note/header area
+          Row 7 = real table header
+          Row 8+ = data
+        */
+        const detailRows = rows.slice(6);
+        const result = rowsToObjects(detailRows);
 
         devHeaders = result.headers;
         devData = result.data;
@@ -599,7 +607,7 @@
         document.getElementById("devLoading").style.display = "none";
       } catch (error) {
         document.getElementById("devLoading").innerHTML =
-          "โหลดข้อมูล Detail Dev ไม่สำเร็จ กรุณาตรวจสอบ Google Sheet CSV link";
+          "โหลดข้อมูล OPS3 Detail Dev ไม่สำเร็จ กรุณาตรวจสอบ Google Sheet CSV link";
         console.error(error);
       }
     }
@@ -639,7 +647,7 @@
       if (data.length === 0) {
         container.innerHTML = `
           <div class="text-center py-10 text-gray-500 bg-white rounded-xl">
-            ไม่พบข้อมูล Detail Dev
+            ไม่พบข้อมูล OPS3 Detail Dev
           </div>
         `;
         return;
@@ -652,7 +660,7 @@
           item.Feature ||
           item.Task ||
           item.Name ||
-          `Detail Dev #${index + 1}`;
+          `OPS3 Detail Dev #${index + 1}`;
 
         const secondValue =
           item[devHeaders[1]] ||
@@ -670,7 +678,7 @@
               <div>
                 <div class="flex items-center gap-2 mb-2 flex-wrap">
                   <span class="px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700">
-                    Detail Dev
+                    OPS3 Detail Dev
                   </span>
 
                   <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
