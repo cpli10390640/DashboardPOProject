@@ -591,11 +591,11 @@
 
         /*
           OPS3 Detail Dev:
-          Row 1-5 = note/header area
-          Row 6 = real table header
-          Row 7+ = data
+          Row 1-4 = note/header area
+          Row 5 = real table header
+          Row 6+ = data
         */
-        const detailRows = rows.slice(5);
+        const detailRows = rows.slice(4);
         const result = rowsToObjects(detailRows);
 
         devHeaders = result.headers;
