@@ -57,6 +57,11 @@
       color: #b91c1c;
     }
 
+    .status-freeze {
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+
     .status-default {
       background: #dbeafe;
       color: #1d4ed8;
@@ -87,7 +92,6 @@
             Master Project Dashboard
           </h1>
 
-```
       <p class="text-gray-500 mt-1">
         Google Sheet Tracking Dashboard
       </p>
@@ -121,7 +125,7 @@
 </div>
 
 <section id="trackingPage">
-  <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+  <div class="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8">
     <div class="glass rounded-2xl p-5 card-shadow border border-white/50">
       <p class="text-gray-500 text-sm font-medium">Total Projects</p>
       <p class="text-3xl font-bold text-gray-800" id="totalProjects">0</p>
@@ -242,7 +246,6 @@
     </div>
   </div>
 </section>
-```
 
   </div>
 
@@ -315,6 +318,7 @@
 
       if (value.includes("progress")) return "status-progress";
       if (value.includes("done")) return "status-done";
+      if (value.includes("freeze")) return "status-freeze";
 
       if (
         value.includes("pending") ||
@@ -425,10 +429,15 @@
         );
       }).length;
 
+      const freeze = trackingData.filter(item =>
+        normalizeStatus(item.Status).includes("freeze")
+      ).length;
+
       document.getElementById("totalProjects").textContent = total;
       document.getElementById("totalProgress").textContent = inProgress;
       document.getElementById("totalDone").textContent = done;
       document.getElementById("totalPending").textContent = pending;
+      document.getElementById("totalFreeze").textContent = freeze;
 
       document.getElementById("lastUpdated").textContent =
         new Date().toLocaleTimeString("th-TH", {
@@ -460,6 +469,8 @@
             status.includes("pending") ||
             status.includes("wait") ||
             status.includes("hold");
+        } else if (trackingFilter === "freeze") {
+          passFilter = status.includes("freeze");
         }
 
         const text = [
